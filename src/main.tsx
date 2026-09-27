@@ -1,16 +1,10 @@
 import { StrictMode } from 'react';
 import { createRoot } from 'react-dom/client';
-
-function App() {
-  return (
-    <main>
-      <h1>Flowboard</h1>
-    </main>
-  );
-}
+import { AppShell } from './app/app-shell';
+import './styles/global.css';
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
-    <App />
+    <AppShell />
   </StrictMode>,
 );

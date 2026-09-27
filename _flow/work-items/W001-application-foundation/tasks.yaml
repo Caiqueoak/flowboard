@@ -7,6 +7,6 @@ tasks:
     depends_on: []
   - id: T002
     title: Build responsive accessible workspace shell and README
-    state: pending
+    state: completed
     depends_on:
       - T001
