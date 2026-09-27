@@ -7,10 +7,21 @@ import {
   type ProjectInput,
 } from '../projects/project';
 import { ProjectList } from '../projects/project-list';
+import {
+  changeTaskStatus,
+  createTask,
+  deleteTask,
+  updateTask,
+  type Task,
+  type TaskInput,
+  type TaskStatus,
+} from '../tasks/task';
+import { TaskBoard } from '../tasks/task-board';
 
 export function AppShell() {
   const [projects, setProjects] = useState<Project[]>([]);
   const [selectedProjectId, setSelectedProjectId] = useState<string | null>(null);
+  const [tasks, setTasks] = useState<Task[]>([]);
   const selectedProject =
     projects.find((project) => project.id === selectedProjectId) ?? null;
 
@@ -31,10 +42,38 @@ export function AppShell() {
   function handleDeleteProject(projectId: string) {
     const remainingProjects = deleteProject(projects, projectId);
     setProjects(remainingProjects);
+    setTasks((currentTasks) =>
+      currentTasks.filter((task) => task.projectId !== projectId),
+    );
 
     if (selectedProjectId === projectId) {
       setSelectedProjectId(remainingProjects[0]?.id ?? null);
     }
+  }
+
+  function handleCreateTask(projectId: string, input: TaskInput) {
+    const task = createTask(projectId, input);
+    setTasks((currentTasks) => [...currentTasks, task]);
+  }
+
+  function handleUpdateTask(taskId: string, input: TaskInput) {
+    setTasks((currentTasks) =>
+      currentTasks.map((task) =>
+        task.id === taskId ? updateTask(task, input) : task,
+      ),
+    );
+  }
+
+  function handleDeleteTask(taskId: string) {
+    setTasks((currentTasks) => deleteTask(currentTasks, taskId));
+  }
+
+  function handleTaskStatusChange(taskId: string, status: TaskStatus) {
+    setTasks((currentTasks) =>
+      currentTasks.map((task) =>
+        task.id === taskId ? changeTaskStatus(task, status) : task,
+      ),
+    );
   }
 
   return (
@@ -81,6 +120,15 @@ export function AppShell() {
                   Your tasks will have a home here.
                 </p>
               )}
+              <TaskBoard
+                key={selectedProject.id}
+                projectId={selectedProject.id}
+                tasks={tasks.filter((task) => task.projectId === selectedProject.id)}
+                onCreate={handleCreateTask}
+                onUpdate={handleUpdateTask}
+                onDelete={handleDeleteTask}
+                onStatusChange={handleTaskStatusChange}
+              />
             </section>
           ) : (
             <section className="project-overview project-overview-empty" aria-live="polite">

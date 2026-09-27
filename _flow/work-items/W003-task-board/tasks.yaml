@@ -1,0 +1,7 @@
+schema_version: 3
+work_item: W003
+tasks:
+  - id: T001
+    title: Implement task board workflows
+    state: completed
+    depends_on: []
