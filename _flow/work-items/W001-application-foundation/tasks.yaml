@@ -1,0 +1,12 @@
+schema_version: 3
+work_item: W001
+tasks:
+  - id: T001
+    title: Set up React TypeScript Vite toolchain
+    state: completed
+    depends_on: []
+  - id: T002
+    title: Build responsive accessible workspace shell and README
+    state: pending
+    depends_on:
+      - T001
