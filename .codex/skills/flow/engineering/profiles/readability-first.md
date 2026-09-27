@@ -1,0 +1,23 @@
+---
+id: flow/readability-first@1
+label: Readability First v1 — Legacy Compatibility
+description: Legacy readability-first profile retained only for existing Flow projects that already reference version 1.
+---
+
+# Readability First
+
+This profile is retained for compatibility with existing approved engineering contracts. New Flow projects default to `flow/readability-first@2`. Do not silently rewrite an existing approved project from v1 to v2; adopt the newer profile only through an explicit engineering-contract revision.
+
+Load this reusable preference template only when synthesizing or explicitly revising engineering.md for a project that still selects v1. After human approval, engineering.md is the project engineering source of truth; do not reload this profile during ordinary implementation.
+
+- Write code for easy understanding through familiar, consistent patterns. Prefer clarity over cleverness.
+- Apply Clean Code and SOLID. SRP is mandatory: each function, class, file and module has one cohesive responsibility and reason to change. SRP does not require tiny fragments or extra layers.
+- Use semantic, domain-oriented names for functions, classes, files, folders and variables. Materialize stack-specific casing and examples in engineering.md.
+- Keep coupling low and cohesion high. Make dependency direction and ownership explicit.
+- Prefer vertical slices around behavior or domain capabilities. Colocate code, tests and private helpers that change together. Shared code needs genuine shared ownership, not generic utils folders.
+- Modularize at meaningful boundaries. Do not introduce interfaces, factories, wrappers, layers or infrastructure without demonstrable value exceeding their complexity and maintenance cost.
+- State the concrete return on complexity before adding it. Defer speculative abstractions; optimize for reading and changing code.
+- Verify behavior, domain logic and external boundaries. Use ecosystem tooling for deterministic checks; qualitative review is not a control-plane fact.
+- Organize tests by module, domain, bounded context or feature when the stack supports it. Engineering must map changed paths/contracts to the smallest safe test commands. Escalate to the broad suite for cross-cutting/shared infrastructure, broad contracts, releases, unknown impact or when no trustworthy mapping exists; never invent a narrow command.
+
+These preferences are not a fixed architecture. Reconcile them with PRD constraints, public contracts, security, stack conventions and explicit exceptions before seeking approval.

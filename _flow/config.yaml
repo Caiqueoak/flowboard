@@ -1,0 +1,8 @@
+schema_version: 4
+flow_version: 2.2.0
+runtimes:
+  - type: codex
+    skills_path: .codex/skills
+engineering:
+  profile: flow/readability-first@2
+  existing_code_policy: not_applicable
