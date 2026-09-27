@@ -1,0 +1,7 @@
+schema_version: 3
+work_item: W004
+tasks:
+  - id: T001
+    title: Persist and recover the local workspace
+    state: completed
+    depends_on: []
