@@ -1,0 +1,7 @@
+schema_version: 3
+work_item: W002
+tasks:
+  - id: T001
+    title: Implement project management workflows
+    state: completed
+    depends_on: []
